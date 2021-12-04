@@ -33,14 +33,13 @@ def main():
 
     bits = read_file_to_memory(filename)
 
-    oxygen = parse(bits, True)[0]
-    co2 = parse(bits, False)[0]
-
-    g_str = ''
-    oxygen_dec = int(g_str.join(list(map(str, oxygen))), 2)
-    co2_dec = int(g_str.join(list(map(str, co2))), 2)
-
-    print(oxygen_dec * co2_dec)
+    gamma = epsilon = ""
+    for n in range(len(bits[0])):
+        col = [row[n] for row in bits]
+        gamma += max(set(col), key=col.count)
+        epsilon += min(set(col), key=col.count)
+    power_consumption = int(gamma, 2) * int(epsilon, 2)
+    print(f"Part 1: {power_consumption}")
 
 
 if __name__ == "__main__":

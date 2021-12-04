@@ -3,7 +3,7 @@ import sys
 
 def read_file_to_memory(path):
     with open(path) as f:
-        content = [list(map(int, list(line.strip()))) for line in f]
+        content = [list(line.strip()) for line in f]
     return content
 
 
@@ -32,15 +32,13 @@ def main():
     filename = sys.argv[1]
 
     bits = read_file_to_memory(filename)
-
-    gamma = parse(bits, True)
-    epsilon = parse(bits, False)
-    
-    g_str = ''
-    gamma_dec = int(g_str.join(list(map(str, gamma))), 2)
-    epsilon_dec = int(g_str.join(list(map(str, epsilon))), 2)
-    
-    print(gamma_dec * epsilon_dec)
+    gamma = epsilon = ""
+    for n in range(len(bits[0])):
+        col = [row[n] for row in bits]
+        gamma += max(set(col), key=col.count)
+        epsilon += min(set(col), key=col.count)
+    power_consumption = int(gamma, 2) * int(epsilon, 2)
+    print(f"Part 1: {power_consumption}")
 
 
 if __name__ == "__main__":
