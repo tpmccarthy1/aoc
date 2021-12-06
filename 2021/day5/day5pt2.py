@@ -7,7 +7,6 @@ def get_range(pt1, pt2):
     else:
         return range(pt1, pt2 + 1)
 
-
 def build_line_horizontal(x1, x2, y1, points):
     for num in get_range(x1, x2):
         if (num,  y1) in points:
@@ -81,7 +80,7 @@ def main():
             # diaganols
             else:
                 build_line_diagonal(x1, x2, y1, y2, points)
-                
+
     res = sum(value >= 2 for value in points.values())
     return res
 
